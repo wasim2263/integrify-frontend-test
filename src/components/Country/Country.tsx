@@ -2,8 +2,8 @@ import {ReactNode, useEffect, useState} from "react";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import axios from "axios";
 import {Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow} from "@mui/material";
-import {Header} from "../Header";
 import Box from "@mui/material/Box";
+import {Header} from "./Header";
 
 interface Column {
     id: 'flag' | 'name' | 'region' | 'population' | 'languages' | "details";
