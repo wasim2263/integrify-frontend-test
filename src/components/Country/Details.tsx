@@ -9,6 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import IconButton from "@mui/material/IconButton";
 import './Details.css'
 interface CountryDetails {
@@ -130,7 +131,7 @@ export const CountryDetails = () => {
                         aria-label="open drawer"
                         sx={{ mr: 2 }}
                     >
-                        <MenuIcon />
+                        <a href="/"><ChevronLeftIcon /> </a>
                     </IconButton>
                     <Typography
                         noWrap
