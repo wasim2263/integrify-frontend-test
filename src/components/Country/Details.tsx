@@ -84,7 +84,7 @@ export const CountryDetails = () => {
                         aria-label="open drawer"
                         sx={{ mr: 2 }}
                     >
-                        <button className="circular-button">A</button>
+                        <button className="circular-button">{countryName?.charAt(0)}</button>
 
                     </IconButton>
                     <Typography
