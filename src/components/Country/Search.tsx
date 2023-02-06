@@ -45,10 +45,13 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
         },
     },
 }));
-export const SearchCountry = () => {
+type SearchCountryProps = { searchCountry: (country:string) => void };
+
+export const SearchCountry = ({searchCountry}:SearchCountryProps) => {
     const [country, setCountry] = useState('');
     const hook = () =>{
-        console.log('search country', country)
+        // console.log('search country', country);
+        searchCountry(country.toLowerCase())
     }
     useEffect(hook,[country])
     return (

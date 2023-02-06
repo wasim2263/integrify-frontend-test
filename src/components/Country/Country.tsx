@@ -82,13 +82,16 @@ const LanguageList = ({languages}: LanguagesProps) => {
 }
 export const Country = () => {
     const [countries, setCountries] = useState<Data[]>([])
+    const [allCountries, setAllCountries] = useState<Data[]>([])
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+
     const hook = () => {
         const eventHandler = (response: any) => {
             console.log('promise fulfilled')
             const countries = response.data.map((country: country) => createData(country.coatOfArms.svg, country.name.common, country.region, country.population, country.languages))
             setCountries(countries)
+            setAllCountries(countries)
         }
         const promise = axios.get('https://restcountries.com/v3.1/all')
         promise.then(eventHandler)
@@ -102,9 +105,14 @@ export const Country = () => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+    const searchCountry = (countryName:string) =>{
+        const searchedCountries = allCountries.filter(country => country.name.toLowerCase().search(countryName) >= 0 );
+        setCountries(searchedCountries);
+        console.log('in country searching',countryName, searchedCountries);
+    }
     return (
         <>
-            <Header/>
+            <Header searchCountry={searchCountry}/>
             <Box sx={{flexGrow: 1}}>
                 <TableContainer sx={{maxHeight: 500}}>
                     <Table stickyHeader aria-label="sticky table">

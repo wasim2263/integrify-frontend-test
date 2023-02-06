@@ -7,8 +7,9 @@ import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
 import {SearchCountry} from "./Search";
 
+type SearchCountryProps = { searchCountry: (country:string) => void };
 
-export const Header = () =>  {
+export const Header = ({searchCountry}:SearchCountryProps) =>  {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -31,7 +32,7 @@ export const Header = () =>  {
                     >
                         Country
                     </Typography>
-                    <SearchCountry/>
+                    <SearchCountry searchCountry={searchCountry}/>
                 </Toolbar>
             </AppBar>
         </Box>
