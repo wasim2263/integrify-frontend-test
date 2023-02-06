@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Routes,Route, useParams} from 'react-router-dom';
-import {Country} from "./components/Country";
+import {Country, CountryDetails} from "./components/Country";
 
 function App() {
    return (
@@ -11,6 +11,7 @@ function App() {
                     path="/"
                     element={<Country/>}
                 />
+                <Route path=":countryName" element={<CountryDetails />} />
             </Routes>
         </div>
    );

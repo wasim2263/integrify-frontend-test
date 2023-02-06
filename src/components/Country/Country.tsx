@@ -59,8 +59,8 @@ function createData(
     return {flag, name, region, population, languages, details};
 }
 
-type country = {
-    coatOfArms: {
+type Country = {
+    flags: {
         svg: string;
     };
     name: {
@@ -89,7 +89,7 @@ export const Country = () => {
     const hook = () => {
         const eventHandler = (response: any) => {
             console.log('promise fulfilled')
-            const countries = response.data.map((country: country) => createData(country.coatOfArms.svg, country.name.common, country.region, country.population, country.languages))
+            const countries = response.data.map((country: Country) => createData(country.flags.svg, country.name.common, country.region, country.population, country.languages))
             setCountries(countries)
             setAllCountries(countries)
         }

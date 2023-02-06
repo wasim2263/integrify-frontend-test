@@ -1,0 +1,11 @@
+.circular-button {
+    background-color: #ee3808; /* orange */
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 50%!important;
+}
