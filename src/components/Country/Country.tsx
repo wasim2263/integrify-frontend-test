@@ -2,11 +2,14 @@ import {ReactNode, useEffect, useState} from "react";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import axios from "axios";
 import {Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow} from "@mui/material";
+import {Header} from "../Header";
+import Box from "@mui/material/Box";
+
 interface Column {
     id: 'flag' | 'name' | 'region' | 'population' | 'languages' | "details";
     label: string;
     minWidth?: number;
-    align?: 'right'|'left';
+    align?: 'right' | 'left';
     format?: (value: string | number) => string;
 }
 
@@ -70,10 +73,10 @@ type country = {
 
 };
 type LanguagesProps = { languages: Record<string, string> };
-const LanguageList = ({languages}:LanguagesProps) => {
+const LanguageList = ({languages}: LanguagesProps) => {
     return (
         <ul>
-            {Object.values(languages).map((language,index)=><li key={index}>{language}</li>)}
+            {Object.values(languages).map((language, index) => <li key={index}>{language}</li>)}
         </ul>
     )
 }
@@ -101,57 +104,61 @@ export const Country = () => {
     };
     return (
         <>
-            <TableContainer sx={{maxHeight: 440}}>
-                <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                    style={{minWidth: column.minWidth}}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {countries
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((country) => {
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={country.name}>
-                                        {columns.map((column) => {
-                                            const value = country[column.id];
-                                            const type = typeof value;
-                                            console.log(type)
-                                            return (
-                                                <TableCell key={column.id} align={column.align}>
-                                                    {column.format && type === 'number'
-                                                        ? column.format(value+"")
-                                                        : column.id !== 'flag'
-                                                            ? value
-                                                            : <img src={value+""} height={"50px"} width={"auto"}/>}
-                                                </TableCell>
+            <Header/>
+            <Box sx={{flexGrow: 1}}>
+                <TableContainer sx={{maxHeight: 500}}>
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((column) => (
+                                    <TableCell
+                                        key={column.id}
+                                        align={column.align}
+                                        style={{minWidth: column.minWidth}}
+                                    >
+                                        {column.label}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {countries
+                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map((country) => {
+                                    return (
+                                        <TableRow hover role="checkbox" tabIndex={-1} key={country.name}>
+                                            {columns.map((column) => {
+                                                const value = country[column.id];
+                                                const type = typeof value;
+                                                console.log(type)
+                                                return (
+                                                    <TableCell key={column.id} align={column.align}>
+                                                        {column.format && type === 'number'
+                                                            ? column.format(value + "")
+                                                            : column.id !== 'flag'
+                                                                ? value
+                                                                :
+                                                                <img src={value + ""} height={"50px"} width={"auto"}/>}
+                                                    </TableCell>
 
-                                            );
-                                        })}
-                                    </TableRow>
-                                );
-                            })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[5, 25, 50, 100]}
-                component="div"
-                count={countries.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
+                                                );
+                                            })}
+                                        </TableRow>
+                                    );
+                                })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <TablePagination
+                    rowsPerPageOptions={[5, 25, 50, 100]}
+                    component="div"
+                    count={countries.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            </Box>
         </>
     );
 
